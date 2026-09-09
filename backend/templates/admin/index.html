@@ -1,0 +1,94 @@
+{% extends 'admin/base.html' %}
+
+{% load i18n %}
+
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block branding %}
+    {% include "unfold/helpers/site_branding.html" %}
+{% endblock %}
+
+{% block content %}
+    <div class="flex flex-col gap-6">
+        <div>
+            <h1 class="text-xl font-semibold text-font-important-light dark:text-font-important-dark">
+                JoyClub Associate control center
+            </h1>
+            <p class="mt-1 text-sm text-font-subtle-light dark:text-font-subtle-dark">
+                Live snapshot of network, KYC, deposits, and withdrawals.
+            </p>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {% for card in joyclub_cards %}
+                <a href="{{ card.link }}"
+                   class="group block rounded-default border border-base-200 bg-white p-5 shadow-xs transition hover:border-primary-500 dark:border-base-800 dark:bg-base-900">
+                    <div class="flex items-start justify-between gap-3">
+                        <div>
+                            <div class="text-xs font-medium uppercase tracking-wide text-font-subtle-light dark:text-font-subtle-dark">
+                                {{ card.title }}
+                            </div>
+                            <div class="mt-2 text-2xl font-semibold tabular-nums text-font-important-light dark:text-font-important-dark">
+                                {{ card.metric }}
+                            </div>
+                            <div class="mt-1 text-sm text-font-subtle-light dark:text-font-subtle-dark">
+                                {{ card.footer }}
+                            </div>
+                        </div>
+                        <span class="material-symbols-outlined rounded-default bg-primary-50 p-2 text-primary-700 group-hover:bg-primary-100 dark:bg-primary-950 dark:text-primary-300">
+                            {{ card.icon }}
+                        </span>
+                    </div>
+                </a>
+            {% empty %}
+                <div class="rounded-default border border-dashed p-6 text-sm text-font-subtle-light">
+                    No dashboard metrics available yet.
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="grid gap-6 xl:grid-cols-3">
+            <div class="xl:col-span-2 rounded-default border border-base-200 bg-white dark:border-base-800 dark:bg-base-900">
+                <div class="border-b border-base-200 px-5 py-4 dark:border-base-800">
+                    <h2 class="font-semibold text-font-important-light dark:text-font-important-dark">Recent associates</h2>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead class="bg-base-50 text-xs uppercase tracking-wide text-font-subtle-light dark:bg-base-800 dark:text-font-subtle-dark">
+                            <tr>
+                                <th class="px-5 py-3">ID</th>
+                                <th class="px-5 py-3">Mobile</th>
+                                <th class="px-5 py-3">Status</th>
+                                <th class="px-5 py-3">Card</th>
+                                <th class="px-5 py-3">Join</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in joyclub_recent %}
+                                <tr class="border-t border-base-100 dark:border-base-800">
+                                    <td class="px-5 py-3 font-medium">
+                                        <a class="text-primary-600 hover:underline" href="/admin/associates/associate/?q={{ row.associate_id }}">
+                                            {{ row.associate_id }}
+                                        </a>
+                                    </td>
+                                    <td class="px-5 py-3">{{ row.mobile }}</td>
+                                    <td class="px-5 py-3 capitalize">{{ row.status }}</td>
+                                    <td class="px-5 py-3 capitalize">{{ row.card_tier }}</td>
+                                    <td class="px-5 py-3 tabular-nums">₹ {{ row.join_amount }}</td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td colspan="5" class="px-5 py-8 text-center text-font-subtle-light">No associates yet.</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="rounded-default border border-base-200 bg-white dark:border-base-800 dark:bg-base-900">
+                {% include "unfold/helpers/app_list_default.html" %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

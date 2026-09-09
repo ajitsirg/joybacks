@@ -1,0 +1,17 @@
+.git
+.tanstack
+.nitro
+.output
+dist
+node_modules
+mobile
+backend/.venv
+backend/media
+backend/staticfiles
+backend/db.sqlite3
+**/.env
+**/*.pyc
+**/__pycache__
+*.md
+agent-transcripts
+.cursor

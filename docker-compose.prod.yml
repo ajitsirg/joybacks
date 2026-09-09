@@ -1,0 +1,90 @@
+# Production stack for joyclubs.in (Hostinger VPS)
+# Host nginx terminates TLS and proxies to 127.0.0.1:18001 (API) / 18002 (web)
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-joyclub}
+      POSTGRES_USER: ${POSTGRES_USER:-joyclub}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-joyclub_prod_change_me}
+    volumes:
+      - joyclub_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-joyclub} -d ${POSTGRES_DB:-joyclub}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    env_file:
+      - ./.env.production
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER:-joyclub}:${POSTGRES_PASSWORD:-joyclub_prod_change_me}@db:5432/${POSTGRES_DB:-joyclub}
+      REDIS_URL: redis://redis:6379/0
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/1
+    volumes:
+      - joyclub_media:/app/media
+      - joyclub_static:/app/staticfiles
+    ports:
+      - "127.0.0.1:18001:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    command: celery -A config worker -l info
+    env_file:
+      - ./.env.production
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER:-joyclub}:${POSTGRES_PASSWORD:-joyclub_prod_change_me}@db:5432/${POSTGRES_DB:-joyclub}
+      REDIS_URL: redis://redis:6379/0
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/1
+    volumes:
+      - joyclub_media:/app/media
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      api:
+        condition: service_started
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+      args:
+        VITE_API_URL: ${VITE_API_URL:-/api/v1}
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:18002:3000"
+    depends_on:
+      - api
+
+volumes:
+  joyclub_pgdata:
+  joyclub_media:
+  joyclub_static:

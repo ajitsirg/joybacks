@@ -1,0 +1,97 @@
+{
+  "ok": true,
+  "base_roi": "2200.00",
+  "buyer_id": "JOYSMOKEROIBUY",
+  "buyer_roi_balance": "2200.00",
+  "upline_total": "330.00",
+  "expected_upline_total": "330.00",
+  "levels": [
+    {
+      "level": 1,
+      "expected": "110.00",
+      "actual": "110.00",
+      "ok": true,
+      "beneficiary": "JOYSMOKEROI10"
+    },
+    {
+      "level": 2,
+      "expected": "55.00",
+      "actual": "55.00",
+      "ok": true,
+      "beneficiary": "JOYSMOKEROI09"
+    },
+    {
+      "level": 3,
+      "expected": "44.00",
+      "actual": "44.00",
+      "ok": true,
+      "beneficiary": "JOYSMOKEROI08"
+    },
+    {
+      "level": 4,
+      "expected": "44.00",
+      "actual": "44.00",
+      "ok": true,
+      "beneficiary": "JOYSMOKEROI07"
+    },
+    {
+      "level": 5,
+      "expected": "22.00",
+      "actual": "22.00",
+      "ok": true,
+      "beneficiary": "JOYSMOKEROI06"
+    },
+    {
+      "level": 6,
+      "expected": "22.00",
+      "actual": "22.00",
+      "ok": true,
+      "beneficiary": "JOYSMOKEROI05"
+    },
+    {
+      "level": 7,
+      "expected": "11.00",
+      "actual": "11.00",
+      "ok": true,
+      "beneficiary": "JOYSMOKEROI04"
+    },
+    {
+      "level": 8,
+      "expected": "11.00",
+      "actual": "11.00",
+      "ok": true,
+      "beneficiary": "JOYSMOKEROI03"
+    },
+    {
+      "level": 9,
+      "expected": "5.50",
+      "actual": "5.50",
+      "ok": true,
+      "beneficiary": "JOYSMOKEROI02"
+    },
+    {
+      "level": 10,
+      "expected": "5.50",
+      "actual": "5.50",
+      "ok": true,
+      "beneficiary": "JOYSMOKEROI01"
+    }
+  ],
+  "logins": {
+    "l1_upline": {
+      "id": "JOYSMOKEROI10",
+      "password": "smoke1234",
+      "expected_level_income": "110.00"
+    },
+    "buyer": {
+      "id": "JOYSMOKEROIBUY",
+      "password": "smoke1234",
+      "expected_base_roi": "2200.00"
+    },
+    "root_l10": {
+      "id": "JOYSMOKEROI00",
+      "password": "smoke1234",
+      "expected_level_income": "5.50"
+    }
+  }
+}

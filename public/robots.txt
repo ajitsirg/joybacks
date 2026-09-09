@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+Allow: /login
+Allow: /register
+Allow: /partner
+
+Disallow: /admin
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /fund
+Disallow: /income
+Disallow: /users
+Disallow: /withdraw
+Disallow: /deposit
+Disallow: /kyc
+Disallow: /rbac
+Disallow: /genealogy
+Disallow: /settings
+
+Sitemap: https://joyclubs.in/sitemap.xml

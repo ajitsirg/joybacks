@@ -1,0 +1,81 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+.output
+.vinxi
+.tanstack/**
+.nitro
+*.local
+
+# Backend
+backend/.venv/
+backend/.env
+backend/db.sqlite3
+backend/db.sqlite3.*
+backend/smoke_roi.sqlite3
+backend/smoke_ajit25.sqlite3
+backend/_prod_data.json
+backend/media/
+backend/staticfiles/
+db.sqlite3
+backups/
+.env
+.env.production
+.env.local
+.env.*.local
+
+# Android APK releases (published locally via mobile/scripts/publish_apk.ps1)
+*.apk
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Flutter / Android build outputs
+mobile/.dart_tool/
+mobile/build/
+mobile/android/.gradle/
+mobile/android/local.properties
+mobile/android/app/build/
+mobile/android/build/
+mobile/ios/Pods/
+mobile/ios/.symlinks/
+mobile/windows/flutter/ephemeral/
+mobile/linux/flutter/ephemeral/
+mobile/macos/Flutter/ephemeral/
+
+# Wrangler / Cloudflare
+.wrangler/
+.dev.vars
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Local-only deploy helper / secrets
+scripts/deploy.local.sh
+.env.production
+
+# Local DB dumps / fixtures — never commit or deploy to production
+backend/_prod_data.json
+backend/_prod_dump.sql
+*_prod_data.json
+local_data.json
+*.pgdump
+*.dump
+*.sql.bak

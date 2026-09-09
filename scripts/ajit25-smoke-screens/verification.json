@@ -1,0 +1,1115 @@
+{
+  "ok": true,
+  "head": {
+    "id": "JOYSMK25AJIT",
+    "name": "Ajit Smoke",
+    "password": "smoke1234",
+    "unlocked_sale_levels": 5,
+    "unlocked_roi_levels": 5,
+    "qualified_direct_sales": 5,
+    "income_wallet": "123200.00",
+    "roi_wallet": "1265.00",
+    "reward_wallet": "105000.00",
+    "main_wallet": "0.00"
+  },
+  "tree": [
+    {
+      "id": "JOYSMK25AJIT",
+      "name": "Ajit Smoke",
+      "sponsor": null
+    },
+    {
+      "id": "JOYSMK25U01",
+      "name": "Dummy 01",
+      "sponsor": "JOYSMK25AJIT"
+    },
+    {
+      "id": "JOYSMK25U02",
+      "name": "Dummy 02",
+      "sponsor": "JOYSMK25AJIT"
+    },
+    {
+      "id": "JOYSMK25U03",
+      "name": "Dummy 03",
+      "sponsor": "JOYSMK25AJIT"
+    },
+    {
+      "id": "JOYSMK25U04",
+      "name": "Dummy 04",
+      "sponsor": "JOYSMK25AJIT"
+    },
+    {
+      "id": "JOYSMK25U05",
+      "name": "Dummy 05",
+      "sponsor": "JOYSMK25AJIT"
+    },
+    {
+      "id": "JOYSMK25U06",
+      "name": "Dummy 06",
+      "sponsor": "JOYSMK25U01"
+    },
+    {
+      "id": "JOYSMK25U07",
+      "name": "Dummy 07",
+      "sponsor": "JOYSMK25U06"
+    },
+    {
+      "id": "JOYSMK25U08",
+      "name": "Dummy 08",
+      "sponsor": "JOYSMK25U07"
+    },
+    {
+      "id": "JOYSMK25U09",
+      "name": "Dummy 09",
+      "sponsor": "JOYSMK25U08"
+    },
+    {
+      "id": "JOYSMK25U10",
+      "name": "Dummy 10",
+      "sponsor": "JOYSMK25U09"
+    },
+    {
+      "id": "JOYSMK25U11",
+      "name": "Dummy 11",
+      "sponsor": "JOYSMK25U10"
+    },
+    {
+      "id": "JOYSMK25U12",
+      "name": "Dummy 12",
+      "sponsor": "JOYSMK25U11"
+    },
+    {
+      "id": "JOYSMK25U13",
+      "name": "Dummy 13",
+      "sponsor": "JOYSMK25U12"
+    },
+    {
+      "id": "JOYSMK25U14",
+      "name": "Dummy 14",
+      "sponsor": "JOYSMK25U13"
+    },
+    {
+      "id": "JOYSMK25U15",
+      "name": "Dummy 15",
+      "sponsor": "JOYSMK25U14"
+    },
+    {
+      "id": "JOYSMK25U16",
+      "name": "Dummy 16",
+      "sponsor": "JOYSMK25U02"
+    },
+    {
+      "id": "JOYSMK25U17",
+      "name": "Dummy 17",
+      "sponsor": "JOYSMK25U02"
+    },
+    {
+      "id": "JOYSMK25U18",
+      "name": "Dummy 18",
+      "sponsor": "JOYSMK25U02"
+    },
+    {
+      "id": "JOYSMK25U19",
+      "name": "Dummy 19",
+      "sponsor": "JOYSMK25U03"
+    },
+    {
+      "id": "JOYSMK25U20",
+      "name": "Dummy 20",
+      "sponsor": "JOYSMK25U03"
+    },
+    {
+      "id": "JOYSMK25U21",
+      "name": "Dummy 21",
+      "sponsor": "JOYSMK25U03"
+    },
+    {
+      "id": "JOYSMK25U22",
+      "name": "Dummy 22",
+      "sponsor": "JOYSMK25U03"
+    },
+    {
+      "id": "JOYSMK25U23",
+      "name": "Dummy 23",
+      "sponsor": "JOYSMK25U03"
+    },
+    {
+      "id": "JOYSMK25U24",
+      "name": "Dummy 24",
+      "sponsor": "JOYSMK25U03"
+    },
+    {
+      "id": "JOYSMK25U25",
+      "name": "Dummy 25",
+      "sponsor": "JOYSMK25U03"
+    }
+  ],
+  "counts": {
+    "head": 1,
+    "downline_25": 25,
+    "roi_extras": 55,
+    "extra_ids": [
+      "JOYSMK25X0101",
+      "JOYSMK25X0201",
+      "JOYSMK25X0202",
+      "JOYSMK25X0301",
+      "JOYSMK25X0302",
+      "JOYSMK25X0303",
+      "JOYSMK25X0401",
+      "JOYSMK25X0402",
+      "JOYSMK25X0403",
+      "JOYSMK25X0404",
+      "JOYSMK25X0501",
+      "JOYSMK25X0502",
+      "JOYSMK25X0503",
+      "JOYSMK25X0504",
+      "JOYSMK25X0505",
+      "JOYSMK25X0601",
+      "JOYSMK25X0602",
+      "JOYSMK25X0603",
+      "JOYSMK25X0604",
+      "JOYSMK25X0605",
+      "JOYSMK25X0606",
+      "JOYSMK25X0701",
+      "JOYSMK25X0702",
+      "JOYSMK25X0703",
+      "JOYSMK25X0704",
+      "JOYSMK25X0705",
+      "JOYSMK25X0706",
+      "JOYSMK25X0707",
+      "JOYSMK25X0801",
+      "JOYSMK25X0802",
+      "JOYSMK25X0803",
+      "JOYSMK25X0804",
+      "JOYSMK25X0805",
+      "JOYSMK25X0806",
+      "JOYSMK25X0807",
+      "JOYSMK25X0808",
+      "JOYSMK25X0901",
+      "JOYSMK25X0902",
+      "JOYSMK25X0903",
+      "JOYSMK25X0904",
+      "JOYSMK25X0905",
+      "JOYSMK25X0906",
+      "JOYSMK25X0907",
+      "JOYSMK25X0908",
+      "JOYSMK25X0909",
+      "JOYSMK25X1001",
+      "JOYSMK25X1002",
+      "JOYSMK25X1003",
+      "JOYSMK25X1004",
+      "JOYSMK25X1005",
+      "JOYSMK25X1006",
+      "JOYSMK25X1007",
+      "JOYSMK25X1008",
+      "JOYSMK25X1009",
+      "JOYSMK25X1010"
+    ]
+  },
+  "tiles": {
+    "referral_income": "55000",
+    "level_income": "68200",
+    "sp_income": "1265",
+    "roi_income": "1265",
+    "reward_income": "105000"
+  },
+  "sale_board": {
+    "unlocked_level": 5,
+    "qualified_direct_sales": 5
+  },
+  "roi_board": {
+    "unlocked_level": 5,
+    "qualified_directs": 5
+  },
+  "wallets": {
+    "ajit": {
+      "id": "JOYSMK25AJIT",
+      "income": "123200.00",
+      "roi": "1265.00",
+      "reward": "105000.00",
+      "main": "0.00"
+    },
+    "l1": {
+      "id": "JOYSMK25U01",
+      "income": "24200.00",
+      "roi": "330.00",
+      "reward": "0.00",
+      "main": "0.00"
+    },
+    "mid": {
+      "id": "JOYSMK25U08",
+      "income": "24200.00",
+      "roi": "308.00",
+      "reward": "0.00",
+      "main": "0.00"
+    },
+    "buyer": {
+      "id": "JOYSMK25U15",
+      "income": "0.00",
+      "roi": "0.00",
+      "reward": "0.00",
+      "main": "0.00"
+    }
+  },
+  "samples": {
+    "sale_l1": {
+      "beneficiary": "JOYSMK25AJIT",
+      "buyer": "JOYSMK25U01",
+      "level": 1,
+      "percent": "5",
+      "amount": "11000.00",
+      "visible": "11,000"
+    },
+    "roi_l1": {
+      "beneficiary": "JOYSMK25U14",
+      "buyer": "JOYSMK25U15",
+      "level": 1,
+      "amount": "110.00",
+      "base_roi": "2,200",
+      "visible": "110"
+    }
+  },
+  "idempotent": {
+    "sale": true,
+    "roi": true
+  },
+  "sale": {
+    "ok": true,
+    "formula": "₹2,20,000 × level % (not ROI)",
+    "levels": [
+      {
+        "level": 1,
+        "percent": "5.0000",
+        "sale_count": 5,
+        "per_sale": "11000.00",
+        "expected": "55000.00",
+        "actual": "55000.00",
+        "ok": true,
+        "buyers": [
+          "JOYSMK25U01",
+          "JOYSMK25U02",
+          "JOYSMK25U03",
+          "JOYSMK25U04",
+          "JOYSMK25U05"
+        ]
+      },
+      {
+        "level": 2,
+        "percent": "2.5000",
+        "sale_count": 11,
+        "per_sale": "5500.00",
+        "expected": "60500.00",
+        "actual": "60500.00",
+        "ok": true,
+        "buyers": [
+          "JOYSMK25U06",
+          "JOYSMK25U16",
+          "JOYSMK25U17",
+          "JOYSMK25U18",
+          "JOYSMK25U19",
+          "JOYSMK25U20",
+          "JOYSMK25U21",
+          "JOYSMK25U22",
+          "JOYSMK25U23",
+          "JOYSMK25U24",
+          "JOYSMK25U25"
+        ]
+      },
+      {
+        "level": 3,
+        "percent": "2.0000",
+        "sale_count": 1,
+        "per_sale": "4400.00",
+        "expected": "4400.00",
+        "actual": "4400.00",
+        "ok": true,
+        "buyers": [
+          "JOYSMK25U07"
+        ]
+      },
+      {
+        "level": 4,
+        "percent": "1.0000",
+        "sale_count": 1,
+        "per_sale": "2200.00",
+        "expected": "2200.00",
+        "actual": "2200.00",
+        "ok": true,
+        "buyers": [
+          "JOYSMK25U08"
+        ]
+      },
+      {
+        "level": 5,
+        "percent": "0.5000",
+        "sale_count": 1,
+        "per_sale": "1100.00",
+        "expected": "1100.00",
+        "actual": "1100.00",
+        "ok": true,
+        "buyers": [
+          "JOYSMK25U09"
+        ]
+      }
+    ],
+    "total_actual": "123200.00",
+    "by_beneficiary": [
+      {
+        "id": "JOYSMK25AJIT",
+        "total": "123200.00",
+        "levels": [
+          {
+            "level": 1,
+            "count": 5,
+            "expected": "55000.00",
+            "actual": "55000.00",
+            "ok": true
+          },
+          {
+            "level": 2,
+            "count": 11,
+            "expected": "60500.00",
+            "actual": "60500.00",
+            "ok": true
+          },
+          {
+            "level": 3,
+            "count": 1,
+            "expected": "4400.00",
+            "actual": "4400.00",
+            "ok": true
+          },
+          {
+            "level": 4,
+            "count": 1,
+            "expected": "2200.00",
+            "actual": "2200.00",
+            "ok": true
+          },
+          {
+            "level": 5,
+            "count": 1,
+            "expected": "1100.00",
+            "actual": "1100.00",
+            "ok": true
+          }
+        ],
+        "ok": true
+      },
+      {
+        "id": "JOYSMK25U01",
+        "total": "24200.00",
+        "levels": [
+          {
+            "level": 1,
+            "count": 1,
+            "expected": "11000.00",
+            "actual": "11000.00",
+            "ok": true
+          },
+          {
+            "level": 2,
+            "count": 1,
+            "expected": "5500.00",
+            "actual": "5500.00",
+            "ok": true
+          },
+          {
+            "level": 3,
+            "count": 1,
+            "expected": "4400.00",
+            "actual": "4400.00",
+            "ok": true
+          },
+          {
+            "level": 4,
+            "count": 1,
+            "expected": "2200.00",
+            "actual": "2200.00",
+            "ok": true
+          },
+          {
+            "level": 5,
+            "count": 1,
+            "expected": "1100.00",
+            "actual": "1100.00",
+            "ok": true
+          }
+        ],
+        "ok": true
+      },
+      {
+        "id": "JOYSMK25U02",
+        "total": "33000.00",
+        "levels": [
+          {
+            "level": 1,
+            "count": 3,
+            "expected": "33000.00",
+            "actual": "33000.00",
+            "ok": true
+          }
+        ],
+        "ok": true
+      },
+      {
+        "id": "JOYSMK25U03",
+        "total": "77000.00",
+        "levels": [
+          {
+            "level": 1,
+            "count": 7,
+            "expected": "77000.00",
+            "actual": "77000.00",
+            "ok": true
+          }
+        ],
+        "ok": true
+      },
+      {
+        "id": "JOYSMK25U06",
+        "total": "24200.00",
+        "levels": [
+          {
+            "level": 1,
+            "count": 1,
+            "expected": "11000.00",
+            "actual": "11000.00",
+            "ok": true
+          },
+          {
+            "level": 2,
+            "count": 1,
+            "expected": "5500.00",
+            "actual": "5500.00",
+            "ok": true
+          },
+          {
+            "level": 3,
+            "count": 1,
+            "expected": "4400.00",
+            "actual": "4400.00",
+            "ok": true
+          },
+          {
+            "level": 4,
+            "count": 1,
+            "expected": "2200.00",
+            "actual": "2200.00",
+            "ok": true
+          },
+          {
+            "level": 5,
+            "count": 1,
+            "expected": "1100.00",
+            "actual": "1100.00",
+            "ok": true
+          }
+        ],
+        "ok": true
+      },
+      {
+        "id": "JOYSMK25U07",
+        "total": "24200.00",
+        "levels": [
+          {
+            "level": 1,
+            "count": 1,
+            "expected": "11000.00",
+            "actual": "11000.00",
+            "ok": true
+          },
+          {
+            "level": 2,
+            "count": 1,
+            "expected": "5500.00",
+            "actual": "5500.00",
+            "ok": true
+          },
+          {
+            "level": 3,
+            "count": 1,
+            "expected": "4400.00",
+            "actual": "4400.00",
+            "ok": true
+          },
+          {
+            "level": 4,
+            "count": 1,
+            "expected": "2200.00",
+            "actual": "2200.00",
+            "ok": true
+          },
+          {
+            "level": 5,
+            "count": 1,
+            "expected": "1100.00",
+            "actual": "1100.00",
+            "ok": true
+          }
+        ],
+        "ok": true
+      },
+      {
+        "id": "JOYSMK25U08",
+        "total": "24200.00",
+        "levels": [
+          {
+            "level": 1,
+            "count": 1,
+            "expected": "11000.00",
+            "actual": "11000.00",
+            "ok": true
+          },
+          {
+            "level": 2,
+            "count": 1,
+            "expected": "5500.00",
+            "actual": "5500.00",
+            "ok": true
+          },
+          {
+            "level": 3,
+            "count": 1,
+            "expected": "4400.00",
+            "actual": "4400.00",
+            "ok": true
+          },
+          {
+            "level": 4,
+            "count": 1,
+            "expected": "2200.00",
+            "actual": "2200.00",
+            "ok": true
+          },
+          {
+            "level": 5,
+            "count": 1,
+            "expected": "1100.00",
+            "actual": "1100.00",
+            "ok": true
+          }
+        ],
+        "ok": true
+      },
+      {
+        "id": "JOYSMK25U09",
+        "total": "24200.00",
+        "levels": [
+          {
+            "level": 1,
+            "count": 1,
+            "expected": "11000.00",
+            "actual": "11000.00",
+            "ok": true
+          },
+          {
+            "level": 2,
+            "count": 1,
+            "expected": "5500.00",
+            "actual": "5500.00",
+            "ok": true
+          },
+          {
+            "level": 3,
+            "count": 1,
+            "expected": "4400.00",
+            "actual": "4400.00",
+            "ok": true
+          },
+          {
+            "level": 4,
+            "count": 1,
+            "expected": "2200.00",
+            "actual": "2200.00",
+            "ok": true
+          },
+          {
+            "level": 5,
+            "count": 1,
+            "expected": "1100.00",
+            "actual": "1100.00",
+            "ok": true
+          }
+        ],
+        "ok": true
+      },
+      {
+        "id": "JOYSMK25U10",
+        "total": "24200.00",
+        "levels": [
+          {
+            "level": 1,
+            "count": 1,
+            "expected": "11000.00",
+            "actual": "11000.00",
+            "ok": true
+          },
+          {
+            "level": 2,
+            "count": 1,
+            "expected": "5500.00",
+            "actual": "5500.00",
+            "ok": true
+          },
+          {
+            "level": 3,
+            "count": 1,
+            "expected": "4400.00",
+            "actual": "4400.00",
+            "ok": true
+          },
+          {
+            "level": 4,
+            "count": 1,
+            "expected": "2200.00",
+            "actual": "2200.00",
+            "ok": true
+          },
+          {
+            "level": 5,
+            "count": 1,
+            "expected": "1100.00",
+            "actual": "1100.00",
+            "ok": true
+          }
+        ],
+        "ok": true
+      },
+      {
+        "id": "JOYSMK25U11",
+        "total": "23100.00",
+        "levels": [
+          {
+            "level": 1,
+            "count": 1,
+            "expected": "11000.00",
+            "actual": "11000.00",
+            "ok": true
+          },
+          {
+            "level": 2,
+            "count": 1,
+            "expected": "5500.00",
+            "actual": "5500.00",
+            "ok": true
+          },
+          {
+            "level": 3,
+            "count": 1,
+            "expected": "4400.00",
+            "actual": "4400.00",
+            "ok": true
+          },
+          {
+            "level": 4,
+            "count": 1,
+            "expected": "2200.00",
+            "actual": "2200.00",
+            "ok": true
+          }
+        ],
+        "ok": true
+      },
+      {
+        "id": "JOYSMK25U12",
+        "total": "20900.00",
+        "levels": [
+          {
+            "level": 1,
+            "count": 1,
+            "expected": "11000.00",
+            "actual": "11000.00",
+            "ok": true
+          },
+          {
+            "level": 2,
+            "count": 1,
+            "expected": "5500.00",
+            "actual": "5500.00",
+            "ok": true
+          },
+          {
+            "level": 3,
+            "count": 1,
+            "expected": "4400.00",
+            "actual": "4400.00",
+            "ok": true
+          }
+        ],
+        "ok": true
+      },
+      {
+        "id": "JOYSMK25U13",
+        "total": "16500.00",
+        "levels": [
+          {
+            "level": 1,
+            "count": 1,
+            "expected": "11000.00",
+            "actual": "11000.00",
+            "ok": true
+          },
+          {
+            "level": 2,
+            "count": 1,
+            "expected": "5500.00",
+            "actual": "5500.00",
+            "ok": true
+          }
+        ],
+        "ok": true
+      },
+      {
+        "id": "JOYSMK25U14",
+        "total": "11000.00",
+        "levels": [
+          {
+            "level": 1,
+            "count": 1,
+            "expected": "11000.00",
+            "actual": "11000.00",
+            "ok": true
+          }
+        ],
+        "ok": true
+      }
+    ]
+  },
+  "roi": {
+    "ok": true,
+    "formula": "Base ROI ₹2,200 × level % (never investment × %)",
+    "deepest_buyer": "JOYSMK25U15",
+    "buyer_roi_balance": "0.00",
+    "buyer_income_balance": "0.00",
+    "upline_total": "330.00",
+    "expected_upline_total": "330.00",
+    "levels": [
+      {
+        "level": 1,
+        "expected": "110.00",
+        "actual": "110.00",
+        "ok": true,
+        "beneficiary": "JOYSMK25U14"
+      },
+      {
+        "level": 2,
+        "expected": "55.00",
+        "actual": "55.00",
+        "ok": true,
+        "beneficiary": "JOYSMK25U13"
+      },
+      {
+        "level": 3,
+        "expected": "44.00",
+        "actual": "44.00",
+        "ok": true,
+        "beneficiary": "JOYSMK25U12"
+      },
+      {
+        "level": 4,
+        "expected": "44.00",
+        "actual": "44.00",
+        "ok": true,
+        "beneficiary": "JOYSMK25U11"
+      },
+      {
+        "level": 5,
+        "expected": "22.00",
+        "actual": "22.00",
+        "ok": true,
+        "beneficiary": "JOYSMK25U10"
+      },
+      {
+        "level": 6,
+        "expected": "22.00",
+        "actual": "22.00",
+        "ok": true,
+        "beneficiary": "JOYSMK25U09"
+      },
+      {
+        "level": 7,
+        "expected": "11.00",
+        "actual": "11.00",
+        "ok": true,
+        "beneficiary": "JOYSMK25U08"
+      },
+      {
+        "level": 8,
+        "expected": "11.00",
+        "actual": "11.00",
+        "ok": true,
+        "beneficiary": "JOYSMK25U07"
+      },
+      {
+        "level": 9,
+        "expected": "5.50",
+        "actual": "5.50",
+        "ok": true,
+        "beneficiary": "JOYSMK25U06"
+      },
+      {
+        "level": 10,
+        "expected": "5.50",
+        "actual": "5.50",
+        "ok": true,
+        "beneficiary": "JOYSMK25U01"
+      }
+    ]
+  },
+  "reward": {
+    "ok": true,
+    "leg1": "2420000.00",
+    "leg2": "1760000.00",
+    "leg3": "880000.00",
+    "total": "5060000.00",
+    "level": 2,
+    "name": "Level 2",
+    "milestones": [
+      {
+        "sno": 1,
+        "status": "achieved",
+        "reward": "30000",
+        "total": "1400000",
+        "leg1": "600000",
+        "leg2": "400000",
+        "leg3": "400000",
+        "remaining_total": "0",
+        "remaining_leg1": "0",
+        "remaining_leg2": "0",
+        "remaining_leg3": "0"
+      },
+      {
+        "sno": 2,
+        "status": "achieved",
+        "reward": "75000",
+        "total": "2500000",
+        "leg1": "1000000",
+        "leg2": "750000",
+        "leg3": "750000",
+        "remaining_total": "0",
+        "remaining_leg1": "0",
+        "remaining_leg2": "0",
+        "remaining_leg3": "0"
+      },
+      {
+        "sno": 3,
+        "status": "pending",
+        "reward": "150000",
+        "total": "5000000",
+        "leg1": "2000000",
+        "leg2": "1500000",
+        "leg3": "1500000",
+        "remaining_total": "0",
+        "remaining_leg1": "0",
+        "remaining_leg2": "0",
+        "remaining_leg3": "620000.00"
+      },
+      {
+        "sno": 4,
+        "status": "locked",
+        "reward": "400000",
+        "total": "10000000",
+        "leg1": "4000000",
+        "leg2": "3000000",
+        "leg3": "3000000",
+        "remaining_total": "4940000.00",
+        "remaining_leg1": "1580000.00",
+        "remaining_leg2": "1240000.00",
+        "remaining_leg3": "2120000.00"
+      },
+      {
+        "sno": 5,
+        "status": "locked",
+        "reward": "1000000",
+        "total": "20000000",
+        "leg1": "8000000",
+        "leg2": "6000000",
+        "leg3": "6000000",
+        "remaining_total": "14940000.00",
+        "remaining_leg1": "5580000.00",
+        "remaining_leg2": "4240000.00",
+        "remaining_leg3": "5120000.00"
+      },
+      {
+        "sno": 6,
+        "status": "locked",
+        "reward": "3000000",
+        "total": "50000000",
+        "leg1": "20000000",
+        "leg2": "15000000",
+        "leg3": "15000000",
+        "remaining_total": "44940000.00",
+        "remaining_leg1": "17580000.00",
+        "remaining_leg2": "13240000.00",
+        "remaining_leg3": "14120000.00"
+      },
+      {
+        "sno": 7,
+        "status": "locked",
+        "reward": "6000000",
+        "total": "100000000",
+        "leg1": "40000000",
+        "leg2": "30000000",
+        "leg3": "30000000",
+        "remaining_total": "94940000.00",
+        "remaining_leg1": "37580000.00",
+        "remaining_leg2": "28240000.00",
+        "remaining_leg3": "29120000.00"
+      },
+      {
+        "sno": 8,
+        "status": "locked",
+        "reward": "10000000",
+        "total": "200000000",
+        "leg1": "80000000",
+        "leg2": "60000000",
+        "leg3": "60000000",
+        "remaining_total": "194940000.00",
+        "remaining_leg1": "77580000.00",
+        "remaining_leg2": "58240000.00",
+        "remaining_leg3": "59120000.00"
+      },
+      {
+        "sno": 9,
+        "status": "locked",
+        "reward": "25000000",
+        "total": "500000000",
+        "leg1": "200000000",
+        "leg2": "150000000",
+        "leg3": "150000000",
+        "remaining_total": "494940000.00",
+        "remaining_leg1": "197580000.00",
+        "remaining_leg2": "148240000.00",
+        "remaining_leg3": "149120000.00"
+      },
+      {
+        "sno": 10,
+        "status": "locked",
+        "reward": "50000000",
+        "total": "1000000000",
+        "leg1": "400000000",
+        "leg2": "300000000",
+        "leg3": "300000000",
+        "remaining_total": "994940000.00",
+        "remaining_leg1": "397580000.00",
+        "remaining_leg2": "298240000.00",
+        "remaining_leg3": "299120000.00"
+      }
+    ]
+  },
+  "logins": {
+    "ajit": {
+      "id": "JOYSMK25AJIT",
+      "password": "smoke1234"
+    },
+    "l1_child": {
+      "id": "JOYSMK25U01",
+      "password": "smoke1234"
+    },
+    "mid": {
+      "id": "JOYSMK25U08",
+      "password": "smoke1234"
+    },
+    "deepest": {
+      "id": "JOYSMK25U15",
+      "password": "smoke1234"
+    }
+  },
+  "screenshots": [
+    {
+      "name": "00-calculation-report",
+      "file": "/Users/ajitsingh/Desktop/mlmsoft/scripts/ajit25-smoke-screens/00-calculation-report.png",
+      "pass": true
+    },
+    {
+      "name": "01-ajit-dashboard",
+      "file": "/Users/ajitsingh/Desktop/mlmsoft/scripts/ajit25-smoke-screens/01-ajit-dashboard.png",
+      "pass": true
+    },
+    {
+      "name": "02-ajit-sale-income",
+      "file": "/Users/ajitsingh/Desktop/mlmsoft/scripts/ajit25-smoke-screens/02-ajit-sale-income.png",
+      "pass": true,
+      "l1": {
+        "pct": 5,
+        "base": 1100000,
+        "earned": 55000,
+        "expected": 55000
+      }
+    },
+    {
+      "name": "03-ajit-roi-income",
+      "file": "/Users/ajitsingh/Desktop/mlmsoft/scripts/ajit25-smoke-screens/03-ajit-roi-income.png",
+      "pass": true,
+      "l1": {
+        "pct": 5,
+        "base": 11000,
+        "earned": 550,
+        "expected": 550
+      }
+    },
+    {
+      "name": "04-ajit-reward",
+      "file": "/Users/ajitsingh/Desktop/mlmsoft/scripts/ajit25-smoke-screens/04-ajit-reward.png",
+      "pass": true
+    },
+    {
+      "name": "05-ajit-wallets",
+      "file": "/Users/ajitsingh/Desktop/mlmsoft/scripts/ajit25-smoke-screens/05-ajit-wallets.png",
+      "pass": true
+    },
+    {
+      "name": "06-l1-child",
+      "file": "/Users/ajitsingh/Desktop/mlmsoft/scripts/ajit25-smoke-screens/06-l1-child.png",
+      "pass": true
+    },
+    {
+      "name": "06b-l1-sale-income",
+      "file": "/Users/ajitsingh/Desktop/mlmsoft/scripts/ajit25-smoke-screens/06b-l1-sale-income.png",
+      "pass": true
+    },
+    {
+      "name": "07-buyer-dashboard",
+      "file": "/Users/ajitsingh/Desktop/mlmsoft/scripts/ajit25-smoke-screens/07-buyer-dashboard.png",
+      "pass": true
+    },
+    {
+      "name": "08-genealogy-team",
+      "file": "/Users/ajitsingh/Desktop/mlmsoft/scripts/ajit25-smoke-screens/08-genealogy-team.png",
+      "pass": true
+    },
+    {
+      "name": "08b-ajit-team",
+      "file": "/Users/ajitsingh/Desktop/mlmsoft/scripts/ajit25-smoke-screens/08b-ajit-team.png",
+      "pass": true
+    },
+    {
+      "name": "09-sale-l1-11000",
+      "file": "/Users/ajitsingh/Desktop/mlmsoft/scripts/ajit25-smoke-screens/09-sale-l1-11000.png",
+      "pass": true,
+      "l1": {
+        "pct": 5,
+        "base": 1100000,
+        "earned": 55000,
+        "expected": 55000
+      }
+    },
+    {
+      "name": "10-roi-l1-110",
+      "file": "/Users/ajitsingh/Desktop/mlmsoft/scripts/ajit25-smoke-screens/10-roi-l1-110.png",
+      "pass": true,
+      "l1": {
+        "pct": 5,
+        "base": 11000,
+        "earned": 550,
+        "expected": 550
+      }
+    },
+    {
+      "name": "11-super-admin-no-reward-nav",
+      "file": "/Users/ajitsingh/Desktop/mlmsoft/scripts/ajit25-smoke-screens/11-super-admin-no-reward-nav.png",
+      "pass": true
+    }
+  ]
+}

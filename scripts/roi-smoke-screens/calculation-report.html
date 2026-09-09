@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"/><title>ROI-on-ROI Smoke Report</title>
+<style>
+  body{font-family:system-ui,sans-serif;max-width:880px;margin:2rem auto;padding:0 1rem;color:#0f2418}
+  h1{color:#064e2a} table{border-collapse:collapse;width:100%;margin:1rem 0}
+  th,td{border:1px solid #c8e6d4;padding:.5rem .75rem;text-align:left}
+  th{background:#e6f5ec}.ok{background:#f0fdf4}.bad{background:#fef2f2}
+  .box{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;margin:1rem 0}
+  code{background:#eef2ff;padding:.1rem .35rem;border-radius:4px}
+</style></head><body>
+<h1>ROI-on-ROI calculation smoke test</h1>
+<p><strong>Formula:</strong> Base ROI = Investment × 1% = <strong>₹2,200</strong>. Level income = Base ROI × Level % (not investment × level %).</p>
+<div class="box">
+  <div>Buyer base ROI: <strong>₹ 2200.00</strong> (expected ₹ 2200.00)</div>
+  <div>Total upline (10 levels): <strong>₹ 330.00</strong> (expected ₹ 330.00)</div>
+  <div>Status: <strong>PASS ✓</strong></div>
+</div>
+<h2>Level breakdown</h2>
+<table><thead><tr><th>Level</th><th>Expected</th><th>Actual</th><th>Beneficiary</th><th></th></tr></thead>
+<tbody><tr class="ok"><td>L1</td><td>₹ 110.00</td><td>₹ 110.00</td><td>JOYSMOKEROI10</td><td>✓</td></tr><tr class="ok"><td>L2</td><td>₹ 55.00</td><td>₹ 55.00</td><td>JOYSMOKEROI09</td><td>✓</td></tr><tr class="ok"><td>L3</td><td>₹ 44.00</td><td>₹ 44.00</td><td>JOYSMOKEROI08</td><td>✓</td></tr><tr class="ok"><td>L4</td><td>₹ 44.00</td><td>₹ 44.00</td><td>JOYSMOKEROI07</td><td>✓</td></tr><tr class="ok"><td>L5</td><td>₹ 22.00</td><td>₹ 22.00</td><td>JOYSMOKEROI06</td><td>✓</td></tr><tr class="ok"><td>L6</td><td>₹ 22.00</td><td>₹ 22.00</td><td>JOYSMOKEROI05</td><td>✓</td></tr><tr class="ok"><td>L7</td><td>₹ 11.00</td><td>₹ 11.00</td><td>JOYSMOKEROI04</td><td>✓</td></tr><tr class="ok"><td>L8</td><td>₹ 11.00</td><td>₹ 11.00</td><td>JOYSMOKEROI03</td><td>✓</td></tr><tr class="ok"><td>L9</td><td>₹ 5.50</td><td>₹ 5.50</td><td>JOYSMOKEROI02</td><td>✓</td></tr><tr class="ok"><td>L10</td><td>₹ 5.50</td><td>₹ 5.50</td><td>JOYSMOKEROI01</td><td>✓</td></tr></tbody></table>
+<p>Example: L1 = ₹2,200 × 5% = ₹110 · L2 = ₹55 · … · Total = ₹330</p>
+<p><em>Isolated smoke DB only — no production data touched.</em></p>
+</body></html>
