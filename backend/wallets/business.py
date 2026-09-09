@@ -4,10 +4,11 @@ from __future__ import annotations
 
 from decimal import Decimal
 
-from django.db import transaction
+from django.db import IntegrityError, transaction
 
 from associates.models import Associate
 from commissions.services import CommissionEngine
+from wallets.models import InvestmentBusinessApplication
 
 
 @transaction.atomic
@@ -30,6 +31,18 @@ def apply_investment_business(
         raise ValueError(
             "Associate must be approved (Inactive/Active) before fund investment can be applied"
         )
+
+    try:
+        # The unique database constraint makes this safe across concurrent retries.
+        # Use a savepoint so the outer transaction remains usable after a duplicate.
+        with transaction.atomic():
+            InvestmentBusinessApplication.objects.create(
+                source_reference=reference,
+                associate=assoc,
+                amount=amount,
+            )
+    except IntegrityError:
+        return
 
     assoc.personal_business += amount
     assoc.total_business += amount

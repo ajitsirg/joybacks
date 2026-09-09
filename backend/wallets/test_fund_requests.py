@@ -36,14 +36,19 @@ class FundTransferRequestAPITests(TestCase):
             "proof": self._proof(),
         }
 
-    def _user(self, username: str, *, staff: bool = False) -> User:
-        user = User.objects.create_user(
+    def _user(self, username: str, *, staff: bool = False, superuser: bool = False) -> User:
+        if superuser:
+            return User.objects.create_superuser(
+                username=username,
+                password="x",
+                email=f"{username}@t.test",
+            )
+        return User.objects.create_user(
             username=username,
             password="x",
             email=f"{username}@t.test",
             is_staff=staff,
         )
-        return user
 
     def _assoc(self, code: str, *, sponsor: Associate | None = None) -> Associate:
         user = self._user(code.lower())
@@ -89,7 +94,7 @@ class FundTransferRequestAPITests(TestCase):
     def test_associate_creates_request_and_staff_approves(self):
         root = self._assoc("JOYFTREQ02")
         member = self._assoc("JOYFTREQ03", sponsor=root)
-        staff = self._user("adminft", staff=True)
+        staff = self._user("adminft", superuser=True)
         WalletService.credit(
             associate=root,
             wallet_type=Wallet.WalletType.MAIN,
@@ -116,6 +121,7 @@ class FundTransferRequestAPITests(TestCase):
         self.assertTrue(created.data["proof_url"])
         req_id = created.data["id"]
         self.assertEqual(self._main(root).balance, SALE)
+        self.assertEqual(self._main(root).held_balance, SALE)
         self.assertEqual(self._main(member).balance, Decimal("0.00"))
 
         self.client.force_authenticate(user=staff)
@@ -144,6 +150,7 @@ class FundTransferRequestAPITests(TestCase):
         self.assertEqual(approved.status_code, 200, approved.data)
         self.assertEqual(approved.data["status"], "approved")
         self.assertEqual(self._main(root).balance, Decimal("0.00"))
+        self.assertEqual(self._main(root).held_balance, Decimal("0.00"))
         self.assertEqual(self._main(member).balance, SALE)
 
         row = FundTransferRequest.objects.get(pk=req_id)
@@ -243,7 +250,7 @@ class FundTransferRequestAPITests(TestCase):
     def test_staff_transfer_debits_sender_and_credits_recipient(self):
         sender = self._assoc("JOYFTFROM1")
         member = self._assoc("JOYFTREQ05", sponsor=sender)
-        staff = self._user("adminft2", staff=True)
+        staff = self._user("adminft2", superuser=True)
         WalletService.credit(
             associate=sender,
             wallet_type=Wallet.WalletType.MAIN,
@@ -271,7 +278,7 @@ class FundTransferRequestAPITests(TestCase):
 
     def test_staff_company_mint_still_credits(self):
         member = self._assoc("JOYFTMINT1")
-        staff = self._user("adminft3", staff=True)
+        staff = self._user("adminft3", superuser=True)
         self.client.force_authenticate(user=staff)
         resp = self.client.post(
             "/api/v1/wallets/transfer/",
@@ -288,3 +295,72 @@ class FundTransferRequestAPITests(TestCase):
         )
         self.assertEqual(resp.status_code, 201, resp.data)
         self.assertEqual(self._main(member).balance, SALE)
+
+    def test_reservation_blocks_second_request_and_rejection_releases_it(self):
+        root = self._assoc("JOYFTHOLD01")
+        first_child = self._assoc("JOYFTHOLD02", sponsor=root)
+        second_child = self._assoc("JOYFTHOLD03", sponsor=root)
+        WalletService.credit(
+            associate=root,
+            wallet_type=Wallet.WalletType.MAIN,
+            amount=SALE,
+            reference="SEED-HOLD",
+            narration="seed",
+        )
+        self.client.force_authenticate(user=root.user)
+        created = self.client.post(
+            "/api/v1/wallets/transfer/requests/",
+            self._request_body(first_child.associate_id, SALE, utr="HOLD-ONE"),
+            format="multipart",
+        )
+        self.assertEqual(created.status_code, 201, created.data)
+        self.assertEqual(self._main(root).held_balance, SALE)
+        blocked = self.client.post(
+            "/api/v1/wallets/transfer/requests/",
+            self._request_body(second_child.associate_id, SALE, utr="HOLD-TWO"),
+            format="multipart",
+        )
+        self.assertEqual(blocked.status_code, 400, blocked.data)
+        self.assertIn("not enough", blocked.data["detail"].lower())
+
+        staff = self._user("holdadmin", superuser=True)
+        self.client.force_authenticate(user=staff)
+        rejected = self.client.post(
+            f"/api/v1/wallets/transfer/requests/{created.data['id']}/reject/",
+            {"reason": "Incorrect proof"},
+            format="json",
+        )
+        self.assertEqual(rejected.status_code, 200, rejected.data)
+        self.assertEqual(self._main(root).held_balance, Decimal("0.00"))
+
+    def test_stale_request_cannot_consume_reserved_funds(self):
+        root = self._assoc("JOYFTSTALE1")
+        child = self._assoc("JOYFTSTALE2", sponsor=root)
+        WalletService.credit(
+            associate=root,
+            wallet_type=Wallet.WalletType.MAIN,
+            amount=SALE,
+            reference="SEED-STALE",
+            narration="seed",
+        )
+        self.client.force_authenticate(user=root.user)
+        created = self.client.post(
+            "/api/v1/wallets/transfer/requests/",
+            self._request_body(child.associate_id, SALE, utr="STALE-ONE"),
+            format="multipart",
+        )
+        self.assertEqual(created.status_code, 201, created.data)
+        child.status = Associate.Status.BLOCKED
+        child.save(update_fields=["status", "updated_at"])
+
+        staff = self._user("staleadmin", superuser=True)
+        self.client.force_authenticate(user=staff)
+        denied = self.client.post(
+            f"/api/v1/wallets/transfer/requests/{created.data['id']}/approve/",
+            {"password": "x"},
+            format="json",
+        )
+        self.assertEqual(denied.status_code, 400, denied.data)
+        self.assertIn("no longer eligible", denied.data["detail"].lower())
+        self.assertEqual(self._main(root).balance, SALE)
+        self.assertEqual(self._main(root).held_balance, SALE)

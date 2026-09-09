@@ -50,6 +50,21 @@ class LedgerEntry(BaseModel):
         indexes = [models.Index(fields=["wallet", "created_at"])]
 
 
+class InvestmentBusinessApplication(BaseModel):
+    """Durable, one-time marker for an investment business source event."""
+
+    source_reference = models.CharField(max_length=80, unique=True)
+    associate = models.ForeignKey(
+        Associate,
+        on_delete=models.PROTECT,
+        related_name="investment_business_applications",
+    )
+    amount = models.DecimalField(max_digits=16, decimal_places=2)
+
+    def __str__(self) -> str:
+        return f"{self.source_reference} → {self.associate.associate_id} {self.amount}"
+
+
 class FundTransferRequest(BaseModel):
     """Associate asks admin to credit a package. Only staff can approve/execute."""
 

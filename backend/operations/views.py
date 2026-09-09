@@ -3,6 +3,7 @@ from rest_framework.decorators import action
 from rest_framework.parsers import FormParser, JSONParser, MultiPartParser
 from rest_framework.response import Response
 
+from core.permissions import has_finance_permission
 from operations.models import DepositRequest, KYCSubmission, WithdrawalRequest
 from operations.serializers import (
     DepositSerializer,
@@ -106,6 +107,7 @@ class DepositViewSet(StaffOrOwnerMixin, viewsets.ModelViewSet):
     serializer_class = DepositSerializer
     filterset_fields = ["status", "wallet_type"]
     search_fields = ["associate__associate_id", "transaction_id"]
+    http_method_names = ["get", "post", "head", "options"]
 
     def perform_create(self, serializer):
         if self.request.user.is_staff and self.request.data.get("associate_id"):
@@ -118,19 +120,28 @@ class DepositViewSet(StaffOrOwnerMixin, viewsets.ModelViewSet):
             raise permissions.PermissionDenied("Associate profile required")
         serializer.save(associate=self.request.user.associate)
 
-    @action(detail=True, methods=["post"], permission_classes=[permissions.IsAdminUser])
+    @action(detail=True, methods=["post"])
     def approve(self, request, pk=None):
+        if not has_finance_permission(request.user, "deposits.approve"):
+            return Response({"detail": "Finance approval permission is required"}, status=403)
         try:
             obj = DepositService.approve(self.get_object(), actor=request.user)
         except ValueError as exc:
             return Response({"detail": str(exc)}, status=400)
         return Response(DepositSerializer(obj).data)
 
-    @action(detail=True, methods=["post"], permission_classes=[permissions.IsAdminUser])
+    @action(detail=True, methods=["post"])
     def reject(self, request, pk=None):
+        if not has_finance_permission(request.user, "deposits.approve"):
+            return Response({"detail": "Finance approval permission is required"}, status=403)
         ser = ReviewActionSerializer(data=request.data)
         ser.is_valid(raise_exception=True)
-        obj = DepositService.reject(self.get_object(), actor=request.user, reason=ser.validated_data.get("reason", ""))
+        try:
+            obj = DepositService.reject(
+                self.get_object(), actor=request.user, reason=ser.validated_data.get("reason", "")
+            )
+        except ValueError as exc:
+            return Response({"detail": str(exc)}, status=400)
         return Response(DepositSerializer(obj).data)
 
 
@@ -144,29 +155,53 @@ class WithdrawalViewSet(StaffOrOwnerMixin, viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         if not hasattr(request.user, "associate"):
             return Response({"detail": "Associate profile required"}, status=403)
-        amount = request.data.get("amount")
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
         try:
-            from decimal import Decimal
-
             obj = WithdrawalService.create(
                 associate=request.user.associate,
-                amount=Decimal(str(amount)),
-                bank_detail=request.data.get("bank_detail", ""),
+                amount=serializer.validated_data["amount"],
+                bank_detail=serializer.validated_data["bank_detail"],
             )
-        except Exception as exc:
+        except ValueError as exc:
             return Response({"detail": str(exc)}, status=400)
         return Response(WithdrawalSerializer(obj).data, status=status.HTTP_201_CREATED)
 
-    @action(detail=True, methods=["post"], permission_classes=[permissions.IsAdminUser])
-    def approve(self, request, pk=None):
+    @action(detail=True, methods=["post"])
+    def verify(self, request, pk=None):
+        if not has_finance_permission(request.user, "withdrawals.approve"):
+            return Response({"detail": "Finance approval permission is required"}, status=403)
+        try:
+            obj = WithdrawalService.verify(self.get_object(), actor=request.user)
+        except ValueError as exc:
+            return Response({"detail": str(exc)}, status=400)
+        return Response(WithdrawalSerializer(obj).data)
+
+    @action(detail=True, methods=["post"])
+    def complete(self, request, pk=None):
+        if not has_finance_permission(request.user, "withdrawals.approve"):
+            return Response({"detail": "Finance approval permission is required"}, status=403)
         try:
             obj = WithdrawalService.approve(self.get_object(), actor=request.user)
         except ValueError as exc:
             return Response({"detail": str(exc)}, status=400)
         return Response(WithdrawalSerializer(obj).data)
 
-    @action(detail=True, methods=["post"], permission_classes=[permissions.IsAdminUser])
+    @action(detail=True, methods=["post"])
+    def approve(self, request, pk=None):
+        """Legacy endpoint; performs final completion, never first-stage verification."""
+        if not has_finance_permission(request.user, "withdrawals.approve"):
+            return Response({"detail": "Finance approval permission is required"}, status=403)
+        try:
+            obj = WithdrawalService.approve(self.get_object(), actor=request.user)
+        except ValueError as exc:
+            return Response({"detail": str(exc)}, status=400)
+        return Response(WithdrawalSerializer(obj).data)
+
+    @action(detail=True, methods=["post"])
     def reject(self, request, pk=None):
+        if not has_finance_permission(request.user, "withdrawals.approve"):
+            return Response({"detail": "Finance approval permission is required"}, status=403)
         ser = ReviewActionSerializer(data=request.data)
         ser.is_valid(raise_exception=True)
         try:

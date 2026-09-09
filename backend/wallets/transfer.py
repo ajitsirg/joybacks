@@ -9,6 +9,7 @@ from django.utils import timezone
 
 from associates.models import Associate
 from audit.services import write_audit
+from core.permissions import has_finance_permission
 from wallets.business import apply_investment_business
 from wallets.fund_packages import (
     format_lakh,
@@ -71,6 +72,8 @@ def admin_fund_transfer(
     company_mint: bool = False,
 ) -> LedgerEntry:
     """Staff transfer: debit sender (or company mint) and credit recipient."""
+    if not has_finance_permission(actor, "wallets.transfer", "fund.transfer"):
+        raise PermissionError("Finance fund-transfer permission is required")
     associate = Associate.objects.get(associate_id__iexact=to_associate_id)
     WalletService.ensure_wallets(associate)
     if wallet_type not in {c.value for c in Wallet.WalletType}:
@@ -175,6 +178,9 @@ def associate_fund_transfer(
         raise PermissionError("Only associates can use associate fund transfer")
     if not actor_assoc.can_fund_transfer:
         raise PermissionError("Fund transfer permission is not enabled for your account")
+    actor_assoc = Associate.objects.select_for_update().get(pk=actor_assoc.pk)
+    if actor_assoc.is_deleted or actor_assoc.status != Associate.Status.ACTIVE:
+        raise ValueError("Only active associates can request a fund transfer")
 
     amount = Decimal(str(amount)).quantize(Decimal("0.01"))
     if not is_fixed_fund_amount(amount):
@@ -335,6 +341,8 @@ def create_fund_transfer_request(
         apply_business=True,
         created_by=actor,
     )
+    main.held_balance += amount
+    main.save(update_fields=["held_balance", "updated_at"])
     write_audit(
         actor=actor,
         action="fund.transfer.request",
@@ -361,8 +369,8 @@ def approve_fund_transfer_request(
     password: str = "",
 ) -> FundTransferRequest:
     """Staff-only: debit requester main wallet and credit the under-leg beneficiary."""
-    if not (getattr(actor, "is_staff", False) or getattr(actor, "is_superuser", False)):
-        raise PermissionError("Only admin can approve fund transfers")
+    if not has_finance_permission(actor, "fund.transfer", "wallets.transfer"):
+        raise PermissionError("Finance fund-transfer permission is required")
     if not password:
         raise PermissionError("Enter your password to confirm this approval")
     if not actor.check_password(password):
@@ -372,6 +380,12 @@ def approve_fund_transfer_request(
         raise ValueError("Request is not pending")
     if locked.requester_id == locked.beneficiary_id:
         raise ValueError("Self transfers are not allowed")
+    if locked.wallet_type != Wallet.WalletType.MAIN:
+        raise ValueError("Fund-transfer requests must use the main wallet")
+    if not is_fixed_fund_amount(locked.amount):
+        raise ValueError("Request amount is no longer a valid fund package")
+    _normalize_utr(locked.utr)
+    _validate_proof(locked.proof)
 
     do_business = locked.apply_business if apply_business is None else bool(apply_business)
     if locked.wallet_type != Wallet.WalletType.MAIN:
@@ -379,8 +393,32 @@ def approve_fund_transfer_request(
 
     requester = Associate.objects.select_for_update().get(pk=locked.requester_id)
     beneficiary = Associate.objects.select_for_update().get(pk=locked.beneficiary_id)
+    if requester.is_deleted or requester.status != Associate.Status.ACTIVE:
+        raise ValueError("Requester is no longer active")
+    if not requester.can_fund_transfer:
+        raise ValueError("Requester is no longer permitted to transfer funds")
+    if beneficiary.is_deleted or beneficiary.status in {
+        Associate.Status.PENDING,
+        Associate.Status.REJECTED,
+        Associate.Status.BLOCKED,
+    }:
+        raise ValueError("Beneficiary is no longer eligible")
+    if not _recipient_in_leg(actor_associate=requester, recipient=beneficiary):
+        raise ValueError("Beneficiary is no longer in the requester's under-leg")
     WalletService.ensure_wallets(requester)
     WalletService.ensure_wallets(beneficiary)
+    requester_wallet = Wallet.objects.select_for_update().get(
+        associate=requester, wallet_type=locked.wallet_type
+    )
+    if requester_wallet.held_balance < locked.amount:
+        raise ValueError("Request reservation is unavailable")
+    # The current request's hold is released immediately before its debit.
+    # The remaining balance must still cover every other pending hold.
+    if requester_wallet.balance < requester_wallet.held_balance:
+        raise ValueError("Requester no longer has sufficient funds")
+    # Consume this request's reservation before debiting. Other pending holds remain protected.
+    requester_wallet.held_balance -= locked.amount
+    requester_wallet.save(update_fields=["held_balance", "updated_at"])
 
     pay_label = payment_method_label(locked.payment_method)
     note = locked.note or f"Approved fund transfer request via {pay_label}"
@@ -448,11 +486,20 @@ def reject_fund_transfer_request(
     actor,
     reason: str = "",
 ) -> FundTransferRequest:
-    if not (getattr(actor, "is_staff", False) or getattr(actor, "is_superuser", False)):
-        raise PermissionError("Only admin can reject fund transfers")
+    if not has_finance_permission(actor, "fund.transfer", "wallets.transfer"):
+        raise PermissionError("Finance fund-transfer permission is required")
     locked = FundTransferRequest.objects.select_for_update().get(pk=request_obj.pk)
     if locked.status != FundTransferRequest.Status.PENDING:
         raise ValueError("Request is not pending")
+    requester = Associate.objects.select_for_update().get(pk=locked.requester_id)
+    WalletService.ensure_wallets(requester)
+    wallet = Wallet.objects.select_for_update().get(
+        associate=requester, wallet_type=locked.wallet_type
+    )
+    if wallet.held_balance < locked.amount:
+        raise ValueError("Request reservation is unavailable")
+    wallet.held_balance -= locked.amount
+    wallet.save(update_fields=["held_balance", "updated_at"])
     locked.status = FundTransferRequest.Status.REJECTED
     locked.reviewed_by = actor
     locked.reviewed_at = timezone.now()

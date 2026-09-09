@@ -96,6 +96,7 @@ class DepositRequest(BaseModel):
 class WithdrawalRequest(BaseModel):
     class Status(models.TextChoices):
         PENDING = "pending", "Pending"
+        VERIFIED = "verified", "Verified"
         COMPLETED = "completed", "Completed"
         REJECTED = "rejected", "Rejected"
 
@@ -106,12 +107,34 @@ class WithdrawalRequest(BaseModel):
     bank_detail = models.CharField(max_length=255, blank=True)
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.PENDING, db_index=True)
     requires_maker_checker = models.BooleanField(default=False)
+    verified_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="verified_withdrawals",
+    )
+    verified_at = models.DateTimeField(null=True, blank=True)
     rejection_reason = models.TextField(blank=True)
     reviewed_by = models.ForeignKey(
         settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL, related_name="withdrawal_reviews"
     )
     reviewed_at = models.DateTimeField(null=True, blank=True)
     transferred_at = models.DateTimeField(null=True, blank=True)
+    hold_ledger_entry = models.ForeignKey(
+        "wallets.LedgerEntry",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="withdrawal_holds",
+    )
+    refund_ledger_entry = models.ForeignKey(
+        "wallets.LedgerEntry",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="withdrawal_refunds",
+    )
 
     class Meta:
         ordering = ["-created_at"]

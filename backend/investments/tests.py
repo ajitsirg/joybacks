@@ -123,6 +123,30 @@ class MonthlyGrowthCommissionTests(TestCase):
         self.assertEqual(growth.monthly_return_amount, MONTHLY_RETURN_AMOUNT)
         self.assertEqual(growth.percent, Decimal("5.0000"))
 
+    def test_repeated_source_reference_applies_business_once(self):
+        root = self._assoc("JOYMIDROOT")
+        buyer = self._assoc("JOYMIDBUY", sponsor=root, active=False)
+
+        apply_investment_business(associate=buyer, amount=SALE, reference="INV-IDEMPOTENT")
+        buyer.refresh_from_db()
+        root.refresh_from_db()
+        first_buyer_business = (buyer.personal_business, buyer.total_business)
+        first_root_total = root.total_business
+        first_contract_count = InvestmentContract.objects.filter(associate=buyer).count()
+        first_commission_count = CommissionEntry.objects.filter(reference="INV-IDEMPOTENT").count()
+
+        apply_investment_business(associate=buyer, amount=SALE, reference="INV-IDEMPOTENT")
+        buyer.refresh_from_db()
+        root.refresh_from_db()
+
+        self.assertEqual((buyer.personal_business, buyer.total_business), first_buyer_business)
+        self.assertEqual(root.total_business, first_root_total)
+        self.assertEqual(InvestmentContract.objects.filter(associate=buyer).count(), first_contract_count)
+        self.assertEqual(
+            CommissionEntry.objects.filter(reference="INV-IDEMPOTENT").count(),
+            first_commission_count,
+        )
+
     def test_network_level_2_gets_2_5_percent_of_base_roi(self):
         root = self._assoc("JOYMROOT02")
         mid = self._assoc("JOYMMID002", sponsor=root)

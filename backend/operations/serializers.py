@@ -1,7 +1,10 @@
+from decimal import Decimal
+
 from rest_framework import serializers
 
 from core.media_urls import absolute_media_url
 from operations.models import DepositRequest, KYCSubmission, WithdrawalRequest
+from wallets.models import Wallet
 
 
 class KYCSerializer(serializers.ModelSerializer):
@@ -139,7 +142,35 @@ class DepositSerializer(serializers.ModelSerializer):
             "applied_at",
             "reviewed_at",
         )
-        read_only_fields = ("status", "rejection_reason", "applied_at", "reviewed_at")
+        read_only_fields = (
+            "status",
+            "rejection_reason",
+            "applied_at",
+            "reviewed_at",
+            "associate_id",
+            "username",
+        )
+
+    def validate_amount(self, value):
+        if value <= Decimal("0"):
+            raise serializers.ValidationError("Amount must be positive.")
+        return value
+
+    def validate_wallet_type(self, value):
+        if value not in {Wallet.WalletType.MAIN, Wallet.WalletType.PERSONAL}:
+            raise serializers.ValidationError("Deposits are allowed only to main or personal wallets.")
+        return value
+
+    def validate_transaction_id(self, value):
+        reference = " ".join((value or "").strip().split())
+        if not reference:
+            raise serializers.ValidationError("Payment reference is required.")
+        existing = DepositRequest.objects.filter(transaction_id__iexact=reference)
+        if self.instance:
+            existing = existing.exclude(pk=self.instance.pk)
+        if existing.exists():
+            raise serializers.ValidationError("This payment reference has already been submitted.")
+        return reference
 
 
 class WithdrawalSerializer(serializers.ModelSerializer):
@@ -158,6 +189,8 @@ class WithdrawalSerializer(serializers.ModelSerializer):
             "bank_detail",
             "status",
             "requires_maker_checker",
+            "verified_by",
+            "verified_at",
             "rejection_reason",
             "created_at",
             "transferred_at",
@@ -168,10 +201,23 @@ class WithdrawalSerializer(serializers.ModelSerializer):
             "net_amount",
             "status",
             "requires_maker_checker",
+            "verified_by",
+            "verified_at",
             "rejection_reason",
             "transferred_at",
             "reviewed_at",
         )
+
+    def validate_amount(self, value):
+        if value <= Decimal("0"):
+            raise serializers.ValidationError("Amount must be positive.")
+        return value
+
+    def validate_bank_detail(self, value):
+        value = " ".join((value or "").strip().split())
+        if not value:
+            raise serializers.ValidationError("Bank details are required.")
+        return value
 
 
 class ReviewActionSerializer(serializers.Serializer):

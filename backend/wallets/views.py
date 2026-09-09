@@ -6,6 +6,7 @@ from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from core.permissions import has_finance_permission
 from wallets.fund_packages import FUND_TRANSFER_AMOUNTS, PAYMENT_METHODS, format_lakh
 from wallets.models import FundTransferRequest, LedgerEntry, Wallet
 from wallets.serializers import FundTransferRequestSerializer, LedgerEntrySerializer, WalletSerializer
@@ -183,7 +184,7 @@ class FundTransferView(APIView):
 
     def post(self, request):
         user = request.user
-        is_staff = user.is_staff or user.is_superuser
+        is_staff = has_finance_permission(user, "wallets.transfer", "fund.transfer")
         associate_id = (request.data.get("associate_id") or "").strip()
         amount_raw = request.data.get("amount", "0")
         narration = request.data.get("narration", "")
@@ -290,9 +291,9 @@ class FundTransferRequestApproveView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, pk):
-        if not (request.user.is_staff or request.user.is_superuser):
+        if not has_finance_permission(request.user, "fund.transfer", "wallets.transfer"):
             return Response(
-                {"detail": "Only admin can approve fund transfers"},
+                {"detail": "Finance fund-transfer permission is required"},
                 status=status.HTTP_403_FORBIDDEN,
             )
         try:
@@ -321,9 +322,9 @@ class FundTransferRequestRejectView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, pk):
-        if not (request.user.is_staff or request.user.is_superuser):
+        if not has_finance_permission(request.user, "fund.transfer", "wallets.transfer"):
             return Response(
-                {"detail": "Only admin can reject fund transfers"},
+                {"detail": "Finance fund-transfer permission is required"},
                 status=status.HTTP_403_FORBIDDEN,
             )
         try:
