@@ -5,7 +5,6 @@ import { BadgeCheck, Eye, EyeOff, Lock, Mail, UserRound } from "lucide-react";
 import { useAuth } from "@/lib/rbac";
 import { ApiError, AuthAPI, setTokens } from "@/lib/api";
 import { emailError, normalizeEmail } from "@/lib/validation";
-import { BrandMark } from "@/components/brand-mark";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -64,8 +63,12 @@ function LoginPage() {
   return (
     <div className="flex min-h-screen flex-col bg-[color:var(--brand-dark)]">
       <div className="flex flex-col items-center px-6 pb-6 pt-10 text-center sm:pt-14">
-        <BrandMark className="h-24 w-24 sm:h-28 sm:w-28" plate="none" />
-        <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-white">JoyClub Associate</h1>
+        <img
+          src="/account/logo-full.png?v=20260911"
+          alt="Joy Hospitality and Real Estate Group"
+          className="h-36 w-36 object-contain sm:h-40 sm:w-40"
+        />
+        <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-white">JoyClub Associate</h1>
         <p className="mt-2 text-sm text-white/75">Secure access to your wealth dashboard</p>
       </div>
 
