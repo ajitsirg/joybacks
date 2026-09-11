@@ -20,7 +20,7 @@ export function BrandMark({ className, imgClassName, plate = "light" }: Props) {
       )}
     >
       <img
-        src="/logo.png"
+        src="/logo.png?v=20260911"
         alt="JoyClub Associate"
         className={cn(
           "h-full w-full object-contain",
