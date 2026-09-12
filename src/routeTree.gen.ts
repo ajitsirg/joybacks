@@ -17,6 +17,7 @@ import { Route as RegisterRouteImport } from './routes/register'
 import { Route as AppBusinessReportRouteImport } from './routes/_app/business-report'
 import { Route as AppDashboardRouteImport } from './routes/_app/dashboard'
 import { Route as AppGenealogyRouteImport } from './routes/_app/genealogy'
+import { Route as AppKnowledgeRouteImport } from './routes/_app/knowledge'
 import { Route as AppDepositCompleteRouteImport } from './routes/_app/deposit.complete'
 import { Route as AppDepositPendingRouteImport } from './routes/_app/deposit.pending'
 import { Route as AppDepositRejectedRouteImport } from './routes/_app/deposit.rejected'
@@ -26,6 +27,7 @@ import { Route as AppFundUserHistoryRouteImport } from './routes/_app/fund.user-
 import { Route as AppFundWalletsRouteImport } from './routes/_app/fund.wallets'
 import { Route as AppGenealogyIndexRouteImport } from './routes/_app/genealogy.index'
 import { Route as AppGenealogyShiftRouteImport } from './routes/_app/genealogy.shift'
+import { Route as AppIncomeAdminChargesRouteImport } from './routes/_app/income.admin-charges'
 import { Route as AppIncomeReferralRouteImport } from './routes/_app/income.referral'
 import { Route as AppIncomeRewardRouteImport } from './routes/_app/income.reward'
 import { Route as AppIncomeRoiRouteImport } from './routes/_app/income.roi'
@@ -98,6 +100,11 @@ const AppGenealogyRoute = AppGenealogyRouteImport.update({
   path: '/genealogy',
   getParentRoute: () => AppRoute,
 } as any)
+const AppKnowledgeRoute = AppKnowledgeRouteImport.update({
+  id: '/knowledge',
+  path: '/knowledge',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppDepositCompleteRoute = AppDepositCompleteRouteImport.update({
   id: '/deposit/complete',
   path: '/deposit/complete',
@@ -142,6 +149,11 @@ const AppGenealogyShiftRoute = AppGenealogyShiftRouteImport.update({
   id: '/shift',
   path: '/shift',
   getParentRoute: () => AppGenealogyRoute,
+} as any)
+const AppIncomeAdminChargesRoute = AppIncomeAdminChargesRouteImport.update({
+  id: '/income/admin-charges',
+  path: '/income/admin-charges',
+  getParentRoute: () => AppRoute,
 } as any)
 const AppIncomeReferralRoute = AppIncomeReferralRouteImport.update({
   id: '/income/referral',
@@ -312,6 +324,7 @@ export interface FileRoutesByFullPath {
   '/business-report': typeof AppBusinessReportRoute
   '/dashboard': typeof AppDashboardRoute
   '/genealogy': typeof AppGenealogyRouteWithChildren
+  '/knowledge': typeof AppKnowledgeRoute
   '/deposit/complete': typeof AppDepositCompleteRoute
   '/deposit/pending': typeof AppDepositPendingRoute
   '/deposit/rejected': typeof AppDepositRejectedRoute
@@ -320,6 +333,7 @@ export interface FileRoutesByFullPath {
   '/fund/user-history': typeof AppFundUserHistoryRoute
   '/fund/wallets': typeof AppFundWalletsRoute
   '/genealogy/shift': typeof AppGenealogyShiftRoute
+  '/income/admin-charges': typeof AppIncomeAdminChargesRoute
   '/income/referral': typeof AppIncomeReferralRoute
   '/income/reward': typeof AppIncomeRewardRoute
   '/income/roi': typeof AppIncomeRoiRoute
@@ -361,6 +375,7 @@ export interface FileRoutesByTo {
   '/register': typeof RegisterRoute
   '/business-report': typeof AppBusinessReportRoute
   '/dashboard': typeof AppDashboardRoute
+  '/knowledge': typeof AppKnowledgeRoute
   '/deposit/complete': typeof AppDepositCompleteRoute
   '/deposit/pending': typeof AppDepositPendingRoute
   '/deposit/rejected': typeof AppDepositRejectedRoute
@@ -369,6 +384,7 @@ export interface FileRoutesByTo {
   '/fund/user-history': typeof AppFundUserHistoryRoute
   '/fund/wallets': typeof AppFundWalletsRoute
   '/genealogy/shift': typeof AppGenealogyShiftRoute
+  '/income/admin-charges': typeof AppIncomeAdminChargesRoute
   '/income/referral': typeof AppIncomeReferralRoute
   '/income/reward': typeof AppIncomeRewardRoute
   '/income/roi': typeof AppIncomeRoiRoute
@@ -412,6 +428,7 @@ export interface FileRoutesById {
   '/_app/business-report': typeof AppBusinessReportRoute
   '/_app/dashboard': typeof AppDashboardRoute
   '/_app/genealogy': typeof AppGenealogyRouteWithChildren
+  '/_app/knowledge': typeof AppKnowledgeRoute
   '/_app/deposit/complete': typeof AppDepositCompleteRoute
   '/_app/deposit/pending': typeof AppDepositPendingRoute
   '/_app/deposit/rejected': typeof AppDepositRejectedRoute
@@ -420,6 +437,7 @@ export interface FileRoutesById {
   '/_app/fund/user-history': typeof AppFundUserHistoryRoute
   '/_app/fund/wallets': typeof AppFundWalletsRoute
   '/_app/genealogy/shift': typeof AppGenealogyShiftRoute
+  '/_app/income/admin-charges': typeof AppIncomeAdminChargesRoute
   '/_app/income/referral': typeof AppIncomeReferralRoute
   '/_app/income/reward': typeof AppIncomeRewardRoute
   '/_app/income/roi': typeof AppIncomeRoiRoute
@@ -464,6 +482,7 @@ export interface FileRouteTypes {
     | '/business-report'
     | '/dashboard'
     | '/genealogy'
+    | '/knowledge'
     | '/deposit/complete'
     | '/deposit/pending'
     | '/deposit/rejected'
@@ -472,6 +491,7 @@ export interface FileRouteTypes {
     | '/fund/user-history'
     | '/fund/wallets'
     | '/genealogy/shift'
+    | '/income/admin-charges'
     | '/income/referral'
     | '/income/reward'
     | '/income/roi'
@@ -513,6 +533,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/business-report'
     | '/dashboard'
+    | '/knowledge'
     | '/deposit/complete'
     | '/deposit/pending'
     | '/deposit/rejected'
@@ -521,6 +542,7 @@ export interface FileRouteTypes {
     | '/fund/user-history'
     | '/fund/wallets'
     | '/genealogy/shift'
+    | '/income/admin-charges'
     | '/income/referral'
     | '/income/reward'
     | '/income/roi'
@@ -563,6 +585,7 @@ export interface FileRouteTypes {
     | '/_app/business-report'
     | '/_app/dashboard'
     | '/_app/genealogy'
+    | '/_app/knowledge'
     | '/_app/deposit/complete'
     | '/_app/deposit/pending'
     | '/_app/deposit/rejected'
@@ -571,6 +594,7 @@ export interface FileRouteTypes {
     | '/_app/fund/user-history'
     | '/_app/fund/wallets'
     | '/_app/genealogy/shift'
+    | '/_app/income/admin-charges'
     | '/_app/income/referral'
     | '/_app/income/reward'
     | '/_app/income/roi'
@@ -672,6 +696,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppGenealogyRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/knowledge': {
+      id: '/_app/knowledge'
+      path: '/knowledge'
+      fullPath: '/knowledge'
+      preLoaderRoute: typeof AppKnowledgeRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/deposit/complete': {
       id: '/_app/deposit/complete'
       path: '/deposit/complete'
@@ -734,6 +765,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/genealogy/shift'
       preLoaderRoute: typeof AppGenealogyShiftRouteImport
       parentRoute: typeof AppGenealogyRoute
+    }
+    '/_app/income/admin-charges': {
+      id: '/_app/income/admin-charges'
+      path: '/income/admin-charges'
+      fullPath: '/income/admin-charges'
+      preLoaderRoute: typeof AppIncomeAdminChargesRouteImport
+      parentRoute: typeof AppRoute
     }
     '/_app/income/referral': {
       id: '/_app/income/referral'
@@ -994,6 +1032,7 @@ interface AppRouteChildren {
   AppBusinessReportRoute: typeof AppBusinessReportRoute
   AppDashboardRoute: typeof AppDashboardRoute
   AppGenealogyRoute: typeof AppGenealogyRouteWithChildren
+  AppKnowledgeRoute: typeof AppKnowledgeRoute
   AppDepositCompleteRoute: typeof AppDepositCompleteRoute
   AppDepositPendingRoute: typeof AppDepositPendingRoute
   AppDepositRejectedRoute: typeof AppDepositRejectedRoute
@@ -1001,6 +1040,7 @@ interface AppRouteChildren {
   AppFundTransferRoute: typeof AppFundTransferRoute
   AppFundUserHistoryRoute: typeof AppFundUserHistoryRoute
   AppFundWalletsRoute: typeof AppFundWalletsRoute
+  AppIncomeAdminChargesRoute: typeof AppIncomeAdminChargesRoute
   AppIncomeReferralRoute: typeof AppIncomeReferralRoute
   AppIncomeRewardRoute: typeof AppIncomeRewardRoute
   AppIncomeRoiRoute: typeof AppIncomeRoiRoute
@@ -1037,6 +1077,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppBusinessReportRoute: AppBusinessReportRoute,
   AppDashboardRoute: AppDashboardRoute,
   AppGenealogyRoute: AppGenealogyRouteWithChildren,
+  AppKnowledgeRoute: AppKnowledgeRoute,
   AppDepositCompleteRoute: AppDepositCompleteRoute,
   AppDepositPendingRoute: AppDepositPendingRoute,
   AppDepositRejectedRoute: AppDepositRejectedRoute,
@@ -1044,6 +1085,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppFundTransferRoute: AppFundTransferRoute,
   AppFundUserHistoryRoute: AppFundUserHistoryRoute,
   AppFundWalletsRoute: AppFundWalletsRoute,
+  AppIncomeAdminChargesRoute: AppIncomeAdminChargesRoute,
   AppIncomeReferralRoute: AppIncomeReferralRoute,
   AppIncomeRewardRoute: AppIncomeRewardRoute,
   AppIncomeRoiRoute: AppIncomeRoiRoute,
