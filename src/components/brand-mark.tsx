@@ -1,5 +1,7 @@
 import { cn } from "@/lib/utils";
 
+const assetUrl = (asset: string) => `${import.meta.env.BASE_URL}${asset}`;
+
 type Props = {
   className?: string;
   imgClassName?: string;
@@ -20,7 +22,7 @@ export function BrandMark({ className, imgClassName, plate = "light" }: Props) {
       )}
     >
       <img
-        src="/account/logo-mark.png?v=20260911b"
+        src={`${assetUrl("logo-mark.png")}?v=20260911b`}
         alt="JoyClub Associate"
         className={cn(
           "h-full w-full object-contain",

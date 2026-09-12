@@ -10,6 +10,8 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { AuthProvider } from "../lib/rbac";
 import { Toaster } from "../components/ui/sonner";
 
+const assetUrl = (asset: string) => `${import.meta.env.BASE_URL}${asset}`;
+
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -93,8 +95,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/account/favicon.png?v=20260911", type: "image/png" },
-      { rel: "apple-touch-icon", href: "/account/logo.png?v=20260911" },
+      { rel: "icon", href: `${assetUrl("favicon.png")}?v=20260911`, type: "image/png" },
+      { rel: "apple-touch-icon", href: `${assetUrl("logo.png")}?v=20260911` },
     ],
   }),
   shellComponent: RootShell,

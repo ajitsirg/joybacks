@@ -1,5 +1,6 @@
 /** Public site used in share / referral links. */
 export const JOYCLUB_PUBLIC_URL = "https://joyclubs.in";
+const REGISTER_PATH = `${import.meta.env.BASE_URL}register`;
 
 export type ReferralShareInput = {
   associateId: string;
@@ -15,8 +16,8 @@ export function referralIdForJoin(input: ReferralShareInput): string {
 
 export function referralJoinUrl(input: ReferralShareInput): string {
   const id = referralIdForJoin(input);
-  if (!id) return `${JOYCLUB_PUBLIC_URL}/register`;
-  return `${JOYCLUB_PUBLIC_URL}/register?ref=${encodeURIComponent(id)}`;
+  if (!id) return `${JOYCLUB_PUBLIC_URL}${REGISTER_PATH}`;
+  return `${JOYCLUB_PUBLIC_URL}${REGISTER_PATH}?ref=${encodeURIComponent(id)}`;
 }
 
 export function formatShareMobile(mobile?: string): string {

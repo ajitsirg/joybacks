@@ -9,6 +9,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 
+const assetUrl = (asset: string) => `${import.meta.env.BASE_URL}${asset}`;
+
 export const Route = createFileRoute("/login")({
   head: () => ({
     meta: [{ title: "Sign in — JoyClub Associate" }],
@@ -64,7 +66,7 @@ function LoginPage() {
     <div className="flex min-h-screen flex-col bg-[color:var(--brand-dark)]">
       <div className="flex flex-col items-center px-6 pb-6 pt-10 text-center sm:pt-14">
         <img
-          src="/account/logo-full.png?v=20260911"
+          src={`${assetUrl("logo-full.png")}?v=20260911`}
           alt="Joy Hospitality and Real Estate Group"
           className="h-36 w-36 object-contain sm:h-40 sm:w-40"
         />
